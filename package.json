@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "demo": "node demo.js",
     "test": "node --test test/*.test.js",
     "check": "node --check server.js && node --check public/app.js && npm test",
     "demo:captures": "node scripts/visual-smoke.js",

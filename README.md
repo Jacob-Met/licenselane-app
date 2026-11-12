@@ -2,6 +2,22 @@
 
 Agree on the use. Keep the exact work you paid for.
 
+## Try the simulated demo
+
+```sh
+npm run demo        # or: node demo.js
+```
+
+Open <http://127.0.0.1:8787> (set `PORT` to use another port). No PayPal keys, no local model and no network are needed; a "Simulated demo: no real PayPal call" badge stays in the corner.
+
+1. Choose **Describe your use**, then open **Use a project brief**: an example brief from a museum is already filled in. Press **Suggest scope fields**, select the suggested changes and apply them, then add a name, a project, a start date (**Today (UTC)**), `6` months and a territory.
+2. Choose **Review price & terms** ($73.00), then **Save proposal for creator**.
+3. Open **Inbox**, **Review request**, and press **Creator: approve saved terms**.
+4. Press **Create PayPal Sandbox checkout**, follow **Open PayPal Sandbox** to the "Simulated PayPal approval" page and press **Approve**.
+5. Back in **Records**, press **Continue checkout**, **Review Sandbox payment**, then **Pay $73.00**. The licence is issued and the download holds the artwork, the exact terms and a certificate.
+
+What is simulated: the PayPal Sandbox calls (token, create order, get order, capture) are answered in-process by a small fake, and the brief reader returns a fixed answer for the example brief. The real PayPal Sandbox and local-model setup is described below.
+
 LicenseLane is a small licensing desk for one independent artist or studio. A buyer describes what they want to do with an artwork, the artist approves the exact terms, the buyer pays through PayPal, and the buyer receives the very file and terms that were approved.
 
 It is for illustrators and photographers who license work to small buyers (a museum guide, a campaign, a book cover) and for those buyers, who usually do not know what to ask for.
