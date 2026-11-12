@@ -1,0 +1,294 @@
+/* Shared gallery walls for the buyer desk and creator catalog. */
+@font-face{font-family:"Instrument Sans";src:url("/fonts/InstrumentSans.ttf") format("truetype");font-style:normal;font-weight:400 700;font-display:swap}
+:root{--ink:#f2f0eb;--ink-soft:#afada8;--paper:#111112;--cream:#222223;--sand:#393938;--brass:#c8c6c0;--light:#19191a;--green:#deded5;--red:#f4a497;--stroke:#414141;--sans:"Instrument Sans",Arial,sans-serif;--serif:var(--sans);color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:var(--sans)}
+a{color:inherit;text-underline-offset:4px}
+:focus-visible{outline:2px solid #f2f0eb!important;outline-offset:4px}
+/* Record headings receive reading focus after navigation; they are not controls. */
+.record-project-title[tabindex="-1"]:focus-visible,.paid-title[tabindex="-1"]:focus-visible{outline:none!important}
+button,input,select,textarea{border-radius:0}
+.gallery-view .mast{height:76px;padding-inline:clamp(24px,4.4vw,80px);background:var(--paper);border-color:#343434;gap:38px}
+.gallery-view .brand,.creator-gallery .brand{font:600 23px/1 var(--sans);letter-spacing:-1px;text-transform:none}
+.gallery-view .mast .desk-tools{display:flex;align-items:center;gap:28px;margin-left:auto}
+.gallery-view .mast .desk-tools a{font:400 14px/1.4 var(--sans);color:var(--ink-soft);text-decoration:none;min-height:44px;display:flex;align-items:center}
+.gallery-view .mast .desk-tools a:hover{color:var(--ink)}
+.gallery-view .connection{margin-left:0;min-width:0;padding:0;border:0;color:var(--ink-soft);font:400 11px/1.4 var(--sans);letter-spacing:0}
+.gallery-view .desk{max-width:1760px;padding:24px clamp(24px,4.4vw,80px) 64px}
+.gallery-view:not(.recovery-desk) .buyer-heading{padding:0;margin:0;min-height:0;border:0}
+.gallery-view .desk-nav{display:flex;gap:28px;margin:0 0 30px;padding:0;border-bottom:1px solid #343434;position:static;background:transparent}
+.gallery-view .desk-nav a{padding:0 0 14px;min-height:35px;font:500 14px/1.4 var(--sans);border:0;flex:none;text-decoration:none;color:var(--ink-soft)}
+.gallery-view .desk-nav a[aria-current],.gallery-view .desk-nav a.active{color:var(--ink);border-bottom:1px solid var(--ink);background:transparent}
+.gallery-view .desk-grid,.gallery-view .steps{display:block}
+.gallery-view #work-section{padding:0;margin:0;border:0;background:transparent}
+.gallery-view .work-grid{display:flex;gap:22px;overflow-x:auto;padding:0 0 24px;scrollbar-width:thin}
+.gallery-view .work{display:flex;align-items:center;gap:12px;flex:0 0 auto;min-width:190px;border:0!important;border-bottom:1px solid transparent!important;background:transparent!important;padding:0 0 12px;text-align:left;box-shadow:none}
+.gallery-view .work[aria-checked=true]{border-bottom-color:var(--ink)!important}
+.gallery-view .work[aria-checked=true]:after{display:none}
+.gallery-view .work-visual{width:54px;height:45px;min-height:0;object-fit:contain;background:transparent;margin:0}
+.gallery-view .work-details{padding:0}
+.gallery-view .work-details strong{font:500 14px/1.4 var(--sans);letter-spacing:0;color:var(--ink)}
+.gallery-view .work-details small{display:none}
+.gallery-view .work-details em{font:400 12px/1.4 var(--sans);color:var(--ink-soft);margin:4px 0 0}
+.gallery-view .asset-preview{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(280px,.8fr);gap:clamp(36px,5vw,88px);margin:0;padding:0;border:0;align-items:start}
+.gallery-view .asset-media{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0b0b0c;padding:clamp(20px,3vw,46px);min-height:510px}
+.gallery-view .asset-media>img{width:100%;max-height:600px;height:clamp(360px,39vw,600px);min-height:0;object-fit:contain;background:transparent;box-shadow:0 14px 45px #0006}
+.gallery-view .asset-media audio{margin:20px 0 0}
+.gallery-view .inspect-artwork{align-self:flex-end;background:transparent;border:0;border-bottom:1px solid #646462;padding:10px 0 4px;margin:15px 0 0;min-height:36px;font:400 12px/1.5 var(--sans);color:var(--ink-soft)}
+.gallery-view .inspect-artwork:hover{color:var(--ink);background:transparent}
+.gallery-view .asset-info{padding:14px 0 0;max-width:none;min-width:0}
+.gallery-view .asset-info h3{font:500 clamp(28px,2.7vw,42px)/1.12 var(--sans);letter-spacing:-1.2px;margin:0 0 12px;overflow-wrap:anywhere}
+.gallery-view .asset-info .asset-creator{font:400 15px/1.5 var(--sans);color:var(--ink-soft);margin:0 0 26px}
+.gallery-view .asset-info .asset-description{font:400 15px/1.65 var(--sans);margin:0 0 14px;max-width:34em;color:var(--ink)}
+.gallery-view .asset-info .asset-specs{font:400 12px/1.5 var(--sans);color:var(--ink-soft);margin:0 0 26px}
+.gallery-view .asset-rights{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px 20px;padding:21px 0;margin:0;border-top:1px solid #414141;border-bottom:1px solid #414141;font:400 13px/1.55 var(--sans)}
+.gallery-view .asset-rights dt{color:var(--ink-soft)}
+.gallery-view .asset-rights dd{font-weight:400}
+.gallery-view .asset-info .asset-price{font:500 25px/1.3 var(--sans);letter-spacing:-.5px;margin:24px 0 16px}
+.gallery-view .asset-price small{display:inline;font:400 13px var(--sans);color:var(--ink-soft);margin-right:9px}
+.gallery-view .asset-use-link{display:flex;align-items:center;justify-content:space-between;min-height:52px;background:var(--ink);color:#141414;font:600 15px/1.4 var(--sans);text-decoration:none;padding:14px 18px;margin:0 0 12px;border:1px solid var(--ink)}
+.gallery-view .asset-use-link:hover{background:#fff}
+.gallery-view .sample-download{font:400 12px/1.5 var(--sans);color:var(--ink-soft);border:0;text-decoration:underline;margin:6px 0 0}
+.gallery-view .policy-card{position:static;background:transparent;color:var(--ink);border:0;border-bottom:1px solid #414141;padding:0;margin:24px 0 0}
+.gallery-view .policy-card summary{font:500 13px/1.5 var(--sans);padding:15px 0;cursor:pointer;color:var(--ink-soft)}
+.gallery-view .policy-card summary span{float:none;margin-left:12px;font-size:12px;color:#878784}
+.gallery-view .policy-card ol{padding:0;max-width:860px}
+.gallery-view .policy-card li{border-color:#414141}
+.gallery-view .policy-card li span,.gallery-view .policy-card li p{color:var(--ink-soft)}
+.gallery-view .policy-card li strong{font:500 17px/1.4 var(--sans)}
+.gallery-view .request-stack{border:0;margin:64px auto 0;padding:0;max-width:840px}
+.gallery-view .request-stack>.step{padding:28px 0;margin:0;border:0;border-top:1px solid #414141;background:transparent;scroll-margin-top:20px}
+.gallery-view .step-head h2{font:500 30px/1.2 var(--sans);letter-spacing:-.6px}
+.gallery-view #request-form{gap:22px}
+.gallery-view #request-form .field-pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.gallery-view label,.gallery-view form label,.gallery-view .approval label{color:var(--ink-soft);font-weight:400;font-size:13px}
+.gallery-view input:not([type=checkbox]),.gallery-view select,.gallery-view textarea{border:1px solid #575756;color:var(--ink);background:#1a1a1b;padding:13px 14px;min-height:48px;font-size:15px}
+.gallery-view input::placeholder,.gallery-view textarea::placeholder{color:#8b8a87;font-weight:400}
+.gallery-view input[type=checkbox]{accent-color:#f2f0eb}
+.gallery-view .checks{display:flex;gap:14px 28px}
+.gallery-view .checks label{display:flex;align-items:center;min-height:40px;color:var(--ink)}
+.gallery-view .primary,.gallery-view .actions button:not(.secondary),.gallery-view .actions a:not(.secondary),.gallery-view .brief-action:not(.brief-secondary),.gallery-view .open-reference button,.gallery-view .creator-controls button{background:var(--ink);color:#141414;border-color:var(--ink);font:600 14px/1.4 var(--sans);letter-spacing:0}
+.gallery-view .primary:hover:not(:disabled),.gallery-view .actions button:not(.secondary):hover{background:#fff;color:#111}
+.gallery-view .primary span:last-child{color:inherit}
+.gallery-view .secondary,.gallery-view .actions .secondary,.gallery-view .scope-revision button,.gallery-view .proposal-handoff button,.gallery-view .order-recovery button,.gallery-view .local-draft-save button,.gallery-view .vault-row button,.gallery-view .brief-secondary{background:transparent;color:var(--ink);border:1px solid #575756}
+.gallery-view .brief-intake,.gallery-view .approval,.gallery-view .local-draft-save,.gallery-view .review-disclosure{border-color:#414141}
+.gallery-view .muted,.gallery-view .brief-status,.gallery-view .brief-hint,.gallery-view .brief-note,.gallery-view .brief-unknown,.gallery-view .brief-field,.gallery-view .brief-evidence,.gallery-view .approval p,.gallery-view .asset-specs{color:var(--ink-soft)}
+.gallery-view .brief-manual-hint{color:var(--ink-soft);font-size:12px;line-height:1.6}
+.gallery-view .brief-evidence{border-color:#777773}
+.gallery-view .state-card,.gallery-view .model-note,.gallery-view .draft-change,.gallery-view .checkout-pending,.gallery-view .scope-revision,.gallery-view .creator-feedback,.gallery-view .revision-note,.gallery-view .buyer-access-note,.gallery-view .restored-note{background:#202021;color:var(--ink)!important;border-color:#888883}
+.gallery-view .state-card p,.gallery-view .state-card h4,.gallery-view .record-state,.gallery-view .saved-edition-notice{color:var(--ink-soft)}
+.gallery-view .eligibility{background:#242424;color:var(--ink);border-left:2px solid var(--ink)}
+.gallery-view .eligibility.fail,.gallery-view .finding.fail,.gallery-view .scope-revision:has(.fail){color:var(--red)}
+.gallery-view .finding{border-color:#414141}.gallery-view .finding b{color:var(--ink-soft)}
+.gallery-view .quote-summary{padding-block:12px;margin-bottom:14px}
+.gallery-view .quote-summary small{color:var(--ink-soft);font-size:11px;line-height:1.45;text-transform:none;letter-spacing:0}
+.gallery-view .review-creator{color:var(--ink-soft)}
+.gallery-view .quote-summary b{font:500 34px/1.2 var(--sans);letter-spacing:-1px}
+.gallery-view .proposal-decision{background:var(--paper);border-color:#414141}
+.gallery-view .proposal-next{color:var(--ink-soft);margin:10px 0 0}
+.gallery-view.reviewing-proposal .desk{max-width:900px}
+.gallery-view.reviewing-proposal .request-stack{margin:0}
+.gallery-view.reviewing-proposal .desk-nav{margin-bottom:18px}
+.gallery-view .review-preview-open{background:#0b0b0c}
+.gallery-view .review-preview-open img{background:transparent}
+.gallery-view .vault{border-color:#414141;margin:40px auto 0}
+.gallery-view .vault summary,.gallery-view .creator-inbox summary{font-size:14px}
+.gallery-view .license-summary dt,.gallery-view .creator-inbox .inbox-state{color:var(--ink-soft)}
+.gallery-view .creator-inbox button{background:var(--ink);color:#141414;border-color:var(--ink)}
+.gallery-view .inbox-art,.gallery-view .saved-edition-preview{background:#0b0b0c}
+.gallery-view .inbox-destination-header h1,.gallery-view .record-project-title{font-family:var(--sans);font-weight:500}
+body.gallery-view>footer{border-top:1px solid #343434;color:var(--ink-soft);font-size:12px;letter-spacing:0}
+.gallery-view .toast{background:#f2f0eb;color:#111;border:1px solid #f2f0eb}
+.gallery-view .capture-review,.gallery-view .artwork-inspector{background:#171718;color:var(--ink);border-color:#626261}
+.gallery-view .capture-review::backdrop,.gallery-view .artwork-inspector::backdrop{background:#000c}
+.gallery-view .payment-actions{background:#171718}
+.gallery-view .capture-review .payment-heading h3,.gallery-view .capture-review .payment-amount,.gallery-view .capture-review .payment-work,.gallery-view .artwork-inspector h2{font-family:var(--sans)}
+.gallery-view .artwork-inspector button{background:#262627;color:var(--ink);border-color:#646463}
+.gallery-view .artwork-inspector header{border-color:#414141}
+.gallery-view .inspector-canvas{background:#080809}
+.gallery-view .inspector-help,.gallery-view .inspector-message{color:var(--ink-soft)}
+.gallery-view .paid-status{color:var(--ink-soft)}
+.gallery-view .paid-download{background:var(--ink);color:#141414}
+.gallery-view .paid-heading h2,.gallery-view .paid-file .saved-edition-name{font-family:var(--sans);font-weight:500}
+.gallery-view .paid-file .saved-edition-preview{background:#0b0b0c}
+.gallery-view .paid-details>.secondary{color:var(--ink);border-color:#646463}
+.gallery-view.paid-record-view .desk{max-width:1180px}
+.gallery-view.paid-record-view .request-stack{margin:0 auto;max-width:1050px}
+.gallery-view .catalog-tools{max-width:460px}
+.gallery-view .catalog-tools label{font:400 12px/1.5 var(--sans)}
+
+/* A creator hangs work on the same wall; forms retain their existing stages. */
+.creator-gallery{font:16px/1.55 var(--sans)}
+.creator-gallery>header{padding:25px clamp(24px,4.4vw,80px);border-color:#343434;gap:30px}
+.creator-gallery>header a{color:var(--ink-soft);font-size:14px;font-weight:400}
+.creator-gallery>header .brand{color:var(--ink)}
+.creator-gallery>header nav{gap:28px}
+.creator-gallery .sandbox-badge{color:var(--ink-soft);border:0;border-radius:0;font:400 11px/1.4 var(--sans);text-transform:none;letter-spacing:0;padding:0}
+.creator-gallery main{max-width:1580px;padding:44px clamp(24px,4.4vw,80px) 80px}
+.creator-gallery h1,.creator-gallery h2,.creator-gallery h3,.creator-gallery #summary h3,.creator-gallery[data-stage=catalog] .intro h1{font-family:var(--sans);font-weight:500;letter-spacing:-.65px}
+.creator-gallery[data-stage=catalog] .intro h1{font-size:38px}
+.creator-gallery .catalog-eyebrow{display:none}
+.creator-gallery label{color:var(--ink-soft);font-weight:400;font-size:14px}
+.creator-gallery input:not([type=checkbox]),.creator-gallery textarea,.creator-gallery select,.creator-gallery .catalog-toolbar select,.creator-gallery .catalog-switcher select{background:#1b1b1c;color:var(--ink);border:1px solid #575756;border-radius:0;font:400 15px/1.5 var(--sans)}
+.creator-gallery input::placeholder,.creator-gallery textarea::placeholder{color:#92918e}
+.creator-gallery button{background:var(--ink);color:#141414;border:1px solid var(--ink);border-radius:0;font:600 14px/1.4 var(--sans);letter-spacing:0}
+.creator-gallery .secondary{background:transparent;color:var(--ink);border-color:#575756}
+.creator-gallery small,.creator-gallery .catalog-credit,.creator-gallery .catalog-uses,.creator-gallery #catalog-overview-count,.creator-gallery .catalog-switcher summary,.creator-gallery .review-credit,.creator-gallery .review dt,.creator-gallery .offer-art span,.creator-gallery .editing-context{color:var(--ink-soft)}
+.creator-gallery .check input{accent-color:var(--ink)}
+.creator-gallery .catalog-toolbar{margin-bottom:40px}
+.creator-gallery .catalog-grid{gap:50px 36px}
+.creator-gallery .catalog-card{border:0;background:transparent}
+.creator-gallery .catalog-art{padding:26px;background:#09090a;height:300px}
+.creator-gallery .catalog-art img{object-fit:contain}
+.creator-gallery .catalog-art:hover img{transform:none}
+.creator-gallery .catalog-card-info{padding:22px 0 0}
+.creator-gallery .catalog-card h2{font:500 26px/1.2 var(--sans);margin:9px 0}
+.creator-gallery .catalog-availability{color:var(--ink-soft);font-weight:400}
+.creator-gallery .catalog-availability:before{background:#deded5}
+.creator-gallery .catalog-availability.is-paused{color:#a5a4a1}
+.creator-gallery .catalog-availability.is-paused:before{background:#777773}
+.creator-gallery .catalog-price{font-size:22px;font-weight:500}
+.creator-gallery .catalog-card-actions{border-color:#414141}
+.creator-gallery .catalog-card-actions a{font-weight:400}
+.creator-gallery .workspace>section,.creator-gallery .terms,.creator-gallery .catalog-switcher,.creator-gallery .retained-original{border-color:#414141}
+.creator-gallery .offer-proof,.creator-gallery .offer-availability,.creator-gallery .offer-availability.paused,.creator-gallery .review,.creator-gallery #saved,.creator-gallery #status:not(:empty){background:#1b1b1c;border-color:#575756;color:var(--ink)}
+.creator-gallery .proof-heading span,.creator-gallery .proof-terms,.creator-gallery .offer-proof dt,.creator-gallery .offer-availability p,.creator-gallery .offer-availability.paused strong{color:var(--ink-soft)}
+.creator-gallery .field-note,.creator-gallery .outside,.creator-gallery #review-status{color:var(--red)}
+.creator-gallery .review-heading,.creator-gallery .review-footer,.creator-gallery .review-details{border-color:#414141}
+.creator-gallery .review-footer{background:#1b1b1c}
+.creator-gallery .offer-art{background:#0b0b0c;padding:20px}
+.creator-gallery .review-changes{border-color:#888883}
+.creator-gallery .offer-art img{object-fit:contain;background:transparent}
+.creator-gallery .review dl{color:var(--ink)}
+.creator-gallery .review-price{font-weight:500;font-size:30px}
+.creator-gallery .review-details p{color:var(--ink-soft)}
+.creator-gallery .review{box-shadow:none}
+@media(min-width:901px){.creator-gallery .catalog-card:only-child .catalog-card-info{padding:24px 38px}.creator-gallery .catalog-card:only-child .catalog-art{min-height:480px}.creator-gallery .catalog-grid>.catalog-card:only-child{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}}
+@media(max-width:1000px){
+ .gallery-view .asset-preview{grid-template-columns:minmax(0,1.4fr) minmax(250px,1fr);gap:30px}
+ .gallery-view .asset-media{min-height:360px;padding:20px}
+ .gallery-view .asset-media>img{height:340px;max-height:none}
+ .gallery-view .asset-info h3{font-size:30px}
+ .gallery-view .asset-rights{grid-template-columns:78px minmax(0,1fr);gap:10px 12px;font-size:12px}
+ .gallery-view .request-stack{max-width:800px;margin-top:48px}
+}
+@media(max-width:700px){
+ .gallery-view .mast{height:auto;min-height:68px;flex-wrap:wrap;padding:21px 20px 0;gap:16px}
+ .gallery-view .brand{font-size:22px;order:0}
+ .gallery-view .connection{order:1;margin-left:auto}
+ .gallery-view .mast .desk-tools{order:2;width:100%;margin:0;gap:26px;border-top:1px solid #343434;justify-content:flex-start}
+ .gallery-view .mast .desk-tools a{font-size:12px;min-height:43px}
+ .gallery-view .desk{padding:20px 20px 50px}
+ .gallery-view .desk-nav{gap:26px;margin:0 0 22px}
+ .gallery-view .desk-nav a{font-size:13px;padding-bottom:11px}
+ .gallery-view .work-grid{gap:18px;padding:0 0 20px}
+ .gallery-view .work{min-width:155px;gap:9px;padding-bottom:10px}
+ .gallery-view .work-visual{width:42px;height:37px}
+ .gallery-view .work-details strong{font-size:12px}.gallery-view .work-details em{font-size:11px}
+ .gallery-view .asset-preview{display:flex;flex-direction:column;gap:24px}
+ .gallery-view .asset-media{width:100%;min-height:0;padding:20px 15px 12px}
+ .gallery-view .asset-media>img{height:auto;max-height:390px;min-height:0;box-shadow:0 10px 25px #0004}
+ .gallery-view .asset-info{padding:0;width:100%}
+ .gallery-view .asset-info h3{font-size:32px;letter-spacing:-.8px;margin-bottom:9px}
+ .gallery-view .asset-info .asset-creator{font-size:13px;margin-bottom:18px}
+ .gallery-view .asset-info .asset-description{font-size:14px;margin-bottom:10px}
+ .gallery-view .asset-info .asset-specs{font-size:12px;margin-bottom:20px}
+ .gallery-view .asset-rights{grid-template-columns:92px minmax(0,1fr);gap:10px 18px;font-size:13px;padding:18px 0}
+ .gallery-view .asset-info .asset-price{font-size:25px;margin:20px 0 13px}
+ .gallery-view .asset-use-link{min-height:50px;font-size:14px}
+ .gallery-view .policy-card{margin-top:22px}
+ .gallery-view #request-form .field-pair{grid-template-columns:1fr;gap:18px}
+ .gallery-view .request-stack{margin:42px auto 0}
+ .gallery-view .step-head h2{font-size:28px}
+ .gallery-view input:not([type=checkbox]),.gallery-view select,.gallery-view textarea{font-size:16px}
+ .gallery-view.reviewing-proposal .desk{padding-top:20px}
+ .gallery-view .quote-summary b{font-size:29px}
+ .creator-gallery>header{padding:21px 20px;gap:16px 20px}
+ .creator-gallery>header nav{gap:20px;order:2;width:100%;margin:0;padding-top:8px}
+ .creator-gallery>header .brand{font-size:22px}
+ .creator-gallery>header .sandbox-badge{margin-left:auto;order:1}
+ .creator-gallery main{padding:28px 20px 60px}
+ .creator-gallery[data-stage=catalog] .intro h1{font-size:29px}
+ .creator-gallery .catalog-grid{gap:36px}
+ .creator-gallery .catalog-toolbar{margin-bottom:28px;grid-template-columns:minmax(0,1fr) 130px}
+ .creator-gallery .catalog-art{height:180px;padding:16px}
+ .creator-gallery .catalog-card-info{padding:14px 0 0}
+ .creator-gallery .catalog-card h2{font-size:22px}
+ .creator-gallery .offer-art{padding:14px}
+ .creator-gallery .review-footer{padding:12px 16px}
+ .creator-gallery[data-stage=review] header nav{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* On a phone the next action follows the artwork's label, before long terms. */
+@media(max-width:700px){
+ .gallery-view .asset-info{display:flex;flex-direction:column}
+ .gallery-view .asset-info h3{order:0}
+ .gallery-view .asset-creator{order:1}
+ .gallery-view .asset-info .asset-price{order:2;margin:0 0 13px}
+ .gallery-view .asset-use-link{order:3;margin-bottom:22px}
+ .gallery-view .asset-description{order:4}
+ .gallery-view .asset-specs{order:5}
+ .gallery-view .asset-rights{order:6}
+ .gallery-view .sample-download{order:7;margin-top:15px}
+}
+
+/* New saved-work and draft paths use the same gallery surfaces. */
+.gallery-view .buyer-record-art{background:#0b0b0c}
+.gallery-view .buyer-record-status{color:var(--ink-soft)}
+.gallery-view .records-eyebrow{display:none}
+.gallery-view .brief-source-dialog{background:#19191a;color:var(--ink);border-color:#646463}
+.gallery-view .brief-source-dialog h2,.gallery-view .brief-source-text{font-family:var(--sans)}
+.gallery-view .brief-source-text mark{background:var(--ink);color:#141414}
+.gallery-view .brief-source-dialog .brief-action{background:var(--ink);color:#141414;border-color:var(--ink)}
+.creator-gallery .creator-draft-banner{background:#202021;border-color:#575756}
+.creator-gallery .creator-draft-banner p,.creator-gallery .creator-draft-status{color:var(--ink-soft)}
+@media(max-width:700px){.gallery-view .asset-info .delivery-details{order:7}.gallery-view .sample-download{order:8}}
+
+/* New creator delivery and clipboard feedback stay legible on gallery walls. */
+.creator-gallery .review-delivery{background:transparent;border-color:var(--stroke);color:var(--ink)}
+.creator-gallery .buyer-link-feedback{color:var(--ink-soft)}
+
+/* Keep collection search available without displacing the work on arrival. */
+.gallery-view .catalog-tools{max-width:none;margin:0 0 16px}
+.gallery-view .catalog-tools>summary{display:flex;align-items:center;gap:18px;width:max-content;min-height:36px;cursor:pointer;list-style:none;font:400 12px/1.5 var(--sans);color:var(--ink-soft)}
+.gallery-view .catalog-tools>summary::-webkit-details-marker{display:none}
+.gallery-view .catalog-tools>summary:before{content:"+";font-size:18px;color:var(--ink);width:12px}
+.gallery-view .catalog-tools[open]>summary:before{content:"−"}
+.gallery-view .catalog-tools>summary>span:first-child{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.gallery-view .catalog-search-panel{max-width:460px;padding:10px 0 0}
+.gallery-view .catalog-search-panel .catalog-results:has(button[hidden]){display:none}
+.gallery-view .catalog-tools[open]{margin-bottom:24px}
+
+/* Keep the selected work present while its buyer describes the project. */
+.gallery-view .scope-work{display:grid;grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:16px;padding:0 0 24px;margin:0 0 24px;border-bottom:1px solid #414141;text-decoration:none;color:var(--ink)}
+.gallery-view .scope-work[hidden]{display:none}
+.gallery-view .scope-work>img{width:64px;height:56px;object-fit:contain;background:#0b0b0c}
+.gallery-view .scope-work strong{display:block;font:500 16px/1.4 var(--sans);overflow-wrap:anywhere}
+.gallery-view .scope-work small{display:block;font:400 12px/1.5 var(--sans);color:var(--ink-soft);margin-top:5px}
+.gallery-view .scope-work-change{font:400 12px/1.4 var(--sans);color:var(--ink-soft);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:700px){.gallery-view .scope-work{grid-template-columns:54px minmax(0,1fr);gap:12px;padding-bottom:18px;margin-bottom:22px}.gallery-view .scope-work>img{width:54px;height:50px;grid-row:1/3}.gallery-view .scope-work-change{grid-column:2;margin-top:-6px}.gallery-view .scope-work strong{font-size:15px}}
+
+.gallery-view #scope-section{scroll-margin-top:20px}
+
+/* Keep a brief's named artwork beside the actual selected offer. */
+.gallery-view .brief-work-dialog{box-sizing:border-box;width:min(620px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:28px;background:#19191a;color:var(--ink);border:1px solid #646463}
+.gallery-view .brief-work-dialog::backdrop{background:rgba(0,0,0,.72)}
+.gallery-view .brief-work-dialog h2{margin:0 0 22px;font:500 26px/1.2 var(--sans);outline:none}
+.gallery-view .brief-work-choices{display:grid;gap:12px}
+.gallery-view .brief-work-option{display:grid;grid-template-columns:86px minmax(0,1fr);align-items:center;gap:18px;width:100%;padding:14px;text-align:left;color:var(--ink);background:#101011;border:1px solid #575756;cursor:pointer}
+.gallery-view .brief-work-option:hover,.gallery-view .brief-work-option:focus-visible{border-color:var(--ink);outline:1px solid var(--ink);outline-offset:2px}
+.gallery-view .brief-work-option:disabled{cursor:default;opacity:.55}
+.gallery-view .brief-work-option img{display:block;width:86px;height:86px;object-fit:contain;background:#080809}
+.gallery-view .brief-work-option small,.gallery-view .brief-work-creator{display:block;font:400 12px/1.5 var(--sans);color:var(--ink-soft)}
+.gallery-view .brief-work-option strong{display:block;margin:5px 0;font:500 18px/1.35 var(--sans);overflow-wrap:anywhere}
+.gallery-view .brief-work-back{display:block;width:100%;margin-top:20px;padding:12px;background:transparent;color:var(--ink);border:1px solid #575756;font:500 14px/1.4 var(--sans);cursor:pointer}
+@media(max-width:700px){.gallery-view .brief-work-dialog{padding:20px}.gallery-view .brief-work-dialog h2{font-size:23px}.gallery-view .brief-work-option{grid-template-columns:64px minmax(0,1fr);gap:12px;padding:12px}.gallery-view .brief-work-option img{width:64px;height:72px}.gallery-view .brief-work-option strong{font-size:17px}}
+
+/* Keep the existing artwork action reachable while browsing on a phone. */
+@media(max-width:700px){
+ .gallery-view:not(:is(.paid-record-view,.reviewing-proposal,.buyer-records-view,.creator-inbox-view,.recovery-desk)):has(.desk-nav a[href="#work-section"][aria-current]) .asset-use-link{position:fixed;z-index:5;left:20px;right:20px;bottom:calc(12px + env(safe-area-inset-bottom,0px));margin:0;min-height:50px;justify-content:center;box-shadow:0 0 0 12px var(--paper),0 12px 0 12px var(--paper)}
+ .gallery-view:not(:is(.paid-record-view,.reviewing-proposal,.buyer-records-view,.creator-inbox-view,.recovery-desk)):has(.desk-nav a[href="#work-section"][aria-current]) #work-section{padding-bottom:88px}
+}
+
+@media(max-width:700px){.gallery-view .asset-saved-records{order:2}}

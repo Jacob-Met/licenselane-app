@@ -1,0 +1,20 @@
+{
+  "name": "licenselane",
+  "version": "0.28.1",
+  "private": false,
+  "description": "Human-approved, evidence-linked creator licenses backed by PayPal Sandbox",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "check": "node --check server.js && node --check public/app.js && npm test",
+    "demo:captures": "node scripts/visual-smoke.js",
+    "demo:film": "node scripts/demo-film.js",
+    "package": "node scripts/package.js",
+    "package:linux": "node scripts/package.js --linux"
+  },
+  "license": "MIT"
+}

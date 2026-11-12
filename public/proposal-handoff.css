@@ -1,0 +1,9 @@
+.state-card .proposal-handoff{margin:18px 0 24px;padding:18px 0;border-block:1px solid var(--stroke)}.state-card .proposal-handoff>summary{font-size:17px;margin-bottom:14px}.state-card .proposal-handoff>button.primary{display:block;width:100%;background:var(--ink);color:var(--light);border:1px solid var(--ink);min-height:48px;font-weight:600}.state-card .proposal-handoff>label{display:block;margin-bottom:12px}
+
+.creator-contact{overflow-wrap:anywhere;margin:0 0 12px}.state-card .proposal-handoff .creator-contact-action{display:block;box-sizing:border-box;text-align:center;text-decoration:none;width:100%;padding:14px 16px;margin-bottom:16px;background:var(--ink);color:var(--light);font-weight:600;min-height:48px}
+
+.state-card .creator-contact-fallback{margin:12px 0}.state-card .creator-contact-fallback>label{display:block;margin:12px 0}.state-card .creator-contact-fallback>summary{font-size:14px;font-weight:400}
+
+.creator-contact-box{margin:18px 0}.creator-contact-box>.creator-contact-action{font-weight:600}.paid-record>.creator-contact-box,.state-card>.creator-contact-box{padding:16px 0;border-block:1px solid var(--stroke)}
+
+.creator-decision-handoff{margin:20px 0;padding:20px 0;border-block:1px solid var(--stroke)}.creator-decision-handoff h3{font-size:19px;margin:0 0 8px}.creator-decision-handoff .decision-handoff-summary{margin:0 0 16px}.creator-decision-handoff>button{display:block;width:100%;min-height:48px;font-weight:600}.creator-decision-handoff details{margin-top:16px}.creator-decision-handoff textarea{box-sizing:border-box;width:100%;margin-top:12px;resize:vertical;line-height:1.5}.creator-decision-handoff [role=status]:empty{display:none}

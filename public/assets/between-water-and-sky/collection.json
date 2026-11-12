@@ -1,0 +1,40 @@
+{
+  "title": "Between Water and Sky",
+  "creator": "LicenseLane Studio (demo)",
+  "works": [
+    {
+      "slug": "the-tidal-archive",
+      "title": "The Tidal Archive",
+      "description": "Between Water and Sky, plate I. A library above the turning tide, reached by a single causeway. Editable vector artwork and a 3,600 × 2,400 print file.",
+      "creator": "LicenseLane Studio (demo)",
+      "priceCents": 4900,
+      "permitted": [
+        "website",
+        "social",
+        "print"
+      ],
+      "maxCopies": 5000,
+      "original": "the-tidal-archive.zip",
+      "preview": "the-tidal-archive-preview.png",
+      "originalSha256": "c655e50139e6615b77c08aac4ffe679d5bddc2590dcbf7aac63e14f38a3827b1",
+      "previewSha256": "cb5d7a3ac1dfc104d2e48cbfbfc06da58f00b83fc603f0463e0be36406d5c157"
+    },
+    {
+      "slug": "the-last-light",
+      "title": "The Last Light",
+      "description": "Between Water and Sky, plate II. A keeper descends the basalt headland while a boat follows the last light home. Editable vector artwork and a 3,600 × 2,400 print file.",
+      "creator": "LicenseLane Studio (demo)",
+      "priceCents": 4900,
+      "permitted": [
+        "website",
+        "social",
+        "print"
+      ],
+      "maxCopies": 5000,
+      "original": "the-last-light.zip",
+      "preview": "the-last-light-preview.png",
+      "originalSha256": "21f2eea1553e69845d36924ccfe429e5e189181cfecf46b4f782d880a17b81bf",
+      "previewSha256": "74a1d4f100e49e316e9224ef35b3471e396ee66acacf16dc5392b70ae1b11772"
+    }
+  ]
+}
