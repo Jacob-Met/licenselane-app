@@ -52,6 +52,7 @@ const payPal = async (method, pathname, body) => {
 // ---- canned AI answer: an Ollama /api/chat reply in the same shape the real call returns ----
 // The fixed rule reads the numbered source passages the app sends and answers only where a passage says it.
 const model = async body => {
+  if (body.messages?.[0]?.images) return json({ error: 'Simulated demo: no vision model is running' }, 503);
   await wait(1200);
   const passages = JSON.parse(body.messages[1].content.split('BUYER SOURCE PASSAGES:\n')[1]);
   const allowed = field => body.format.properties[field].anyOf?.find(x => x.type === 'object')?.properties.s.enum || [];
@@ -95,6 +96,10 @@ server.on('request', async (req, res) => {
   const url = new URL(req.url || '/', origin);
   if (req.method === 'GET' && url.pathname === '/demo-badge.css') return send(res, 200, 'text/css; charset=utf-8', fs.readFileSync(path.join(__dirname, 'demo-badge.css')));
   if (req.method === 'GET' && url.pathname === '/demo-badge.js') return send(res, 200, 'text/javascript; charset=utf-8', badgeJs);
+  if (req.method === 'GET' && url.pathname === '/found.html') {
+    const html = fs.readFileSync(path.join(__dirname, 'public', 'found.html'), 'utf8').replace('</body>', '<script src="/demo-badge.js" defer></script></body>').replace('</head>', '<link rel="stylesheet" href="/demo-badge.css"></head>');
+    return send(res, 200, 'text/html; charset=utf-8', html);
+  }
   if (req.method === 'GET' && url.pathname === '/') {
     const html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8').replace('</body>', '<script src="/demo-badge.js" defer></script></body>').replace('</head>', '<link rel="stylesheet" href="/demo-badge.css"></head>');
     return send(res, 200, 'text/html; charset=utf-8', html);

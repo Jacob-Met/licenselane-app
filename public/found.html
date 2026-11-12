@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Found uses — LicenseLane</title><meta name="description" content="Show where your work appeared and send a fair PayPal license offer in a few taps."><link rel="stylesheet" href="/found.css"></head>
+<body>
+<header class="top"><a class="brand" href="/">LicenseLane</a><nav aria-label="Creator navigation"><a href="/">Buyer desk</a><a href="/creator.html">Add artwork</a></nav></header>
+<main>
+<section id="home" class="view" aria-labelledby="home-title">
+  <div class="drop" id="drop">
+    <h1 id="home-title">Where did you spot your work?</h1>
+    <p class="lede">Drop in a screenshot or photo of it in use. I will find which of your works it is and draft a fair license offer.</p>
+    <div class="drop-actions"><label class="btn primary" for="file">Choose a picture</label><input id="file" type="file" accept="image/png,image/jpeg,image/webp" hidden></div>
+    <p class="hint">Or paste a screenshot with Ctrl+V / Cmd+V.</p>
+    <div class="samples" aria-label="Try a sample"><span class="label">Try a sample</span><div id="sample-row" class="chips"></div></div>
+    <details class="words"><summary>Describe it in words instead</summary><label for="words-text">What does the picture show, and where?</label><textarea id="words-text" rows="3" maxlength="600" placeholder="A lighthouse keeper on a dark headland, used as a post on a cafe's Instagram"></textarea><button id="words-go" class="btn" type="button">Find my work</button></details>
+    <label id="code-field" class="code" hidden>Creator approval code<input id="creator-code" type="password" autocomplete="off"></label>
+    <p id="home-status" class="status" role="status" aria-live="polite"></p>
+  </div>
+  <div class="list-head"><h2>Your licenses</h2><span id="list-count" class="count"></span></div>
+  <ul id="list" class="list" aria-live="polite"></ul>
+  <p id="list-empty" class="empty" hidden>Nothing yet. Licensed works and uses you find will appear here.</p>
+</section>
+
+<section id="analyzing" class="view" hidden aria-live="polite">
+  <figure class="shot big"><img id="analyzing-shot" alt="The picture you added"><div class="scan" aria-hidden="true"></div></figure>
+  <p class="working" id="analyzing-text">Reading the picture on this computer…</p>
+</section>
+
+<section id="confirm" class="view" hidden aria-labelledby="confirm-title">
+  <button class="back" id="confirm-back" type="button">← Back</button>
+  <div class="compare">
+    <figure class="shot"><img id="confirm-shot" alt="Where your work appeared"><figcaption id="confirm-caption"></figcaption></figure>
+    <div class="cands">
+      <h2 id="confirm-title">Is this your work?</h2>
+      <p id="confirm-sub" class="soft"></p>
+      <div id="cand-list" class="cand-list"></div>
+      <button id="none-of-these" class="btn quiet" type="button">None of these</button>
+    </div>
+  </div>
+</section>
+
+<section id="offer" class="view" hidden aria-labelledby="offer-title">
+  <button class="back" id="offer-back" type="button">← Not this work</button>
+  <article class="sheet">
+    <div class="sheet-pic"><img id="offer-shot" alt="Where the work was found"><span class="tag">Where I found it</span><img id="offer-work" class="inset" alt=""></div>
+    <div class="sheet-body">
+      <p class="eyebrow">License offer</p>
+      <h2 id="offer-title"></h2>
+      <p id="offer-by" class="soft"></p>
+      <label class="field">Licensed to<input id="offer-who" type="text" maxlength="100" placeholder="Name or business using it" autocomplete="off"></label>
+      <p id="offer-seen" class="seen"></p>
+      <div class="group"><span class="label" id="use-label">Use</span><div class="seg" id="use-seg" role="radiogroup" aria-labelledby="use-label"></div></div>
+      <div class="group" id="copies-group" hidden><span class="label">Copies</span><div class="step"><button type="button" id="copies-minus" aria-label="Fewer copies">−</button><output id="copies-out"></output><button type="button" id="copies-plus" aria-label="More copies">+</button></div></div>
+      <div class="group"><span class="label" id="len-label">Length</span><div class="seg" id="len-seg" role="radiogroup" aria-labelledby="len-label"></div></div>
+      <div class="group"><span class="label">Territory</span><strong id="offer-territory"></strong></div>
+      <div class="price-row"><span class="label">Total</span><strong id="offer-price" aria-live="polite">—</strong></div>
+      <ul id="offer-notes" class="notes" aria-live="polite"></ul>
+      <form id="say-form" class="say" autocomplete="off"><label for="say">Change it by typing</label><div class="say-row"><input id="say" type="text" maxlength="160" placeholder="make it one year, social only, not print"><button class="btn" type="submit">Apply</button></div><div id="say-examples" class="chips"></div><p id="say-status" class="status" role="status" aria-live="polite"></p></form>
+    </div>
+    <div class="sheet-foot"><button id="make-link" class="btn primary wide" type="button">Create PayPal link and message</button><p class="fine">The buyer pays through PayPal Sandbox. The file and exact terms are released only after verified payment.</p></div>
+  </article>
+</section>
+
+<section id="sent" class="view" hidden aria-labelledby="sent-title">
+  <article class="sheet slim">
+    <div class="sheet-body">
+      <p class="eyebrow">Ready to send</p>
+      <h2 id="sent-title">Offer sent to the list</h2>
+      <p id="sent-line" class="soft"></p>
+      <a id="pp-link" class="btn primary wide" target="_blank" rel="noopener noreferrer" href="#">Open PayPal checkout</a>
+      <label class="field">Message to send<textarea id="msg" rows="11"></textarea></label>
+      <div class="two"><button id="copy-msg" class="btn" type="button">Copy message</button><button id="copy-link" class="btn" type="button">Copy link only</button></div>
+      <p id="sent-status" class="status" role="status" aria-live="polite"></p>
+      <button id="sent-done" class="btn quiet wide" type="button">Back to my licenses</button>
+    </div>
+  </article>
+</section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="/found-offer.js"></script><script src="/found.js"></script>
+</body></html>

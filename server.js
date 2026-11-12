@@ -10,6 +10,7 @@ const {recoveryReceipts}=require('./lib/recovery-receipts');
 const {requestChanges,revisionLink}=require('./lib/proposal-revisions');
 'use strict';
 const {creatorInbox}=require('./lib/creator-inbox');
+const foundUses=require('./lib/found');
 
 // LicenseLane: real creator review -> sandbox payment -> evidence-bound certificate.
 const http = require('node:http');
@@ -279,6 +280,7 @@ function createApp(options={}){
     if(current.status==='issued'&&checkpoint&&!checkpoint.acknowledged(current))throw bad('Payment received. Your files are still being saved for recovery. Check this license again shortly.',503);
   }
   const creatorCatalog=createCatalog(file);
+  const found=foundUses.create({dataFile:file});
   const allWorks=()=>[...CATALOG,...creatorCatalog.works()];
   // Original bytes live with the persistent license data, not the changing application catalog.
   const originalDir=path.join(path.dirname(file),'approved-assets');
@@ -427,13 +429,17 @@ function createApp(options={}){
   }
   async function readBody(req){
     const catalogPath=new URL(req.url,'http://localhost').pathname;
-    const limit=/^\/api\/creator\/catalog(?:\/creator-[a-f0-9-]+)?$/.test(catalogPath)?12*1024*1024:16384;
+    const limit=/^\/api\/creator\/catalog(?:\/creator-[a-f0-9-]+)?$/.test(catalogPath)?12*1024*1024:catalogPath==='/api/found/analyze'?4*1024*1024:16384;
     let chunks=[],bytes=0;for await(const chunk of req){bytes+=chunk.length;if(bytes>limit)throw bad('Request exceeds the allowed size.',413);chunks.push(chunk);}
     try{return JSON.parse(Buffer.concat(chunks).toString('utf8')||'{}');}catch{throw bad('Malformed JSON.');}
   }
   async function action(req,method,pathname,body,briefSignal,onBriefProgress,onBriefScope){
     if(recoveryOnly&&method!=='GET'&&!(method==='POST'&&/^\/api\/licenses\/[a-f0-9]{64}\/(buyer-access|check-payment)$/.test(pathname)))throw bad('This recovery copy can open saved licenses and files, but cannot change agreements or payments.',423);
     const data=loadData(file);
+    if(pathname.startsWith('/api/found/')){
+      const listed=()=>{const {includeDemoWorks}=creatorCatalog.settings();return allWorks().filter(w=>w.offerStatus!=='paused'&&(w.custom||(includeDemoWorks&&listedBundledWorks.has(w.id))));};
+      return found.handle({method,pathname,body,data,req,authorize,works:listed,inspectOrder:license=>paypal.inspect(license)});
+    }
     if(method==='GET'&&pathname==='/api/config')return {paypalConfigured:paypal.configured,aiConfigured:ai.configured,briefConfigured:briefExtractor.configured,creatorCodeRequired:!!creatorCode,sandboxOnly:true,...(recoveryUrl?{recoveryUrl}:{}),...(restoredOrigin?{restoredOrigin}:{}),...(installationOrigin?{installationOrigin}:{}),...(recoveryOnly?{recoveryOnly:true,recoveryOrigin,...(primaryUrl?{primaryUrl}:{}),recoveryPaymentCheckConfigured:!!receipts}:{})};
     if(method==='GET'&&pathname==='/api/catalog'){
       try{const {includeDemoWorks}=creatorCatalog.settings();return {works:allWorks().filter(w=>w.offerStatus!=='paused'&&(w.custom||(includeDemoWorks&&listedBundledWorks.has(w.id)))),policy:PERIOD_POLICY};}
@@ -695,7 +701,7 @@ function createApp(options={}){
         const filename=pathname==='/'?'index.html':pathname.slice(1);
         if(recoveryOnly&&filename==='creator.html'){res.writeHead(302,{Location:'/'});res.end();return;}
         const assetFiles=['lantern-atlas.svg','blue-hour.svg','blue-hour.wav','copper-signal.svg','copper-signal.zip','ASSETS.md',...AUTHORED_CATALOG.flatMap(work=>[work.preview.slice('/assets/'.length),work.download.slice('/assets/'.length)])];
-        if(!['buyer-decision.js','license-price.js','license-scope.js','request-scope.js','proposal-handoff.css','proposal-handoff.js','delivery-details.js','delivery-details.css','zip-inventory.js','gallery.css','certificate.css','certificate.js','fonts/InstrumentSans.ttf','fonts/OFL-InstrumentSans.txt','buyer-catalog.js','paid-record.js','paid-record.css','desk-navigation.js','creator.html','creator.js','creator-previews.js','creator.css','index.html','asset-inspector.js','asset-inspector.css','app.js','records-backup.js','record-handoff.js','brief.js','brief-selection.js','edition.js','revision-comparison.js','creator-inbox.js','proposal-revisions.js','draft.js','style.css'].includes(filename)&&!assetFiles.some(name=>filename==='assets/'+name))throw bad('Not found.',404);
+        if(!['buyer-decision.js','license-price.js','license-scope.js','request-scope.js','proposal-handoff.css','proposal-handoff.js','delivery-details.js','delivery-details.css','zip-inventory.js','gallery.css','certificate.css','certificate.js','fonts/InstrumentSans.ttf','fonts/OFL-InstrumentSans.txt','buyer-catalog.js','paid-record.js','paid-record.css','desk-navigation.js','creator.html','creator.js','found.html','found.js','found.css','found-offer.js','creator-previews.js','creator.css','index.html','asset-inspector.js','asset-inspector.css','app.js','records-backup.js','record-handoff.js','brief.js','brief-selection.js','edition.js','revision-comparison.js','creator-inbox.js','proposal-revisions.js','draft.js','style.css'].includes(filename)&&!assetFiles.some(name=>filename==='assets/'+name))throw bad('Not found.',404);
         const type=filename.endsWith('.ttf')?'font/ttf':filename.endsWith('.txt')?'text/plain; charset=utf-8':filename.endsWith('.svg')?'image/svg+xml':filename.endsWith('.png')?'image/png':filename.endsWith('.wav')?'audio/wav':filename.endsWith('.zip')?'application/zip':filename.endsWith('.md')?'text/markdown':filename.endsWith('.css')?'text/css':filename.endsWith('.js')?'application/javascript':'text/html';
         const payload=fs.readFileSync(path.join(ROOT,'public',filename));
         res.writeHead(200,{'Content-Type':type,'Content-Length':payload.length,'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; frame-ancestors 'none'"});res.end(payload);return;
